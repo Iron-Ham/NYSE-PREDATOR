@@ -30,14 +30,12 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-
 \documentclass[12pt]{article}
-\usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
-
 \begin{document}
 
 \begin{titlepage}
@@ -49,17 +47,25 @@
 %----------------------------------------------------------------------------------------
 %	HEADING SECTIONS
 %----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+\begin{figure}[b]
+\centering
+\includegraphics[scale=0.25]{logo.png}\\ % Include a department/university logo - this will require the graphicx package
+ \end{figure}
+%----------------------------------------------------------------------------------------
 
-\textsc{\LARGE University Name}\\[1.5cm] % Name of your university/college
-\textsc{\Large Major Heading}\\[0.5cm] % Major heading such as course name
-\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+\textsc{\LARGE Central Michigan University}\\[1.5cm] % Name of your university/college
+\textsc{\Large Department of Computer Science}\\[0.5cm] % Major heading such as course name
+\textsc{\large Artificial Intelligence}\\[0.5cm] % Minor heading such as course title
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 
 \HRule \\[0.4cm]
-{ \huge \bfseries Title}\\[0.4cm] % Title of your document
+{ \huge \bfseries Using Twitter and News Source Sentiment Analysis to Predict Stock Market Movement}\\[0.4cm] % Title of your document
 \HRule \\[1.5cm]
  
 %----------------------------------------------------------------------------------------
@@ -68,15 +74,18 @@
 
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
-\emph{Author:}\\
-John \textsc{Smith} % Your name
+\emph{Authors:}\\
+Hesham \textsc{Salman}\\ % Your name
+Neeraj \textsc{Rajesh}\\
+Adithi \textsc{Potdar}
 \end{flushleft}
 \end{minipage}
 ~
 \begin{minipage}{0.4\textwidth}
 \begin{flushright} \large
+\vspace*{-1.2cm}
 \emph{Supervisor:} \\
-Dr. James \textsc{Smith} % Supervisor's Name
+Dr. Lisa \textsc{Gandy}% Supervisor's Name
 \end{flushright}
 \end{minipage}\\[2cm]
 
@@ -89,85 +98,22 @@ Dr. James \textsc{Smith} % Supervisor's Name
 %----------------------------------------------------------------------------------------
 
 {\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
-
-%----------------------------------------------------------------------------------------
-%	LOGO SECTION
-%----------------------------------------------------------------------------------------
-
-\includegraphics{logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
- 
-%----------------------------------------------------------------------------------------
-
 \vfill % Fill the rest of the page with whitespace
 
 \end{titlepage}
 
 
 \begin{abstract}
-Your abstract.
+As Bollen et al. have shown, Twitter sentiment analysis can be used to predict stock market movement as a whole. Bollen, along with others, have used proprietary algorithms -- such as GPOMS (Google Profile of Mood States) -- to achieve their high model accuracy (87\%). Other researchers have been able to achieve good results with non-proprietary algorithms (60-75\%). By mining \textit{cash}-tags (company trading codes preceded by "\$", frequently used by traders) for \textit{specific} companies and performing a sentiment analysis on the results, we may be able to predict the movement of specific stocks. Sentiment data may have to be normalized; tweet sentiments are cyclical in many ways ("happy" sentiments increase during the holidays, for example), and it stands to reason that financial tweets may be affected by general changes in tweet sentiment. 
 \end{abstract}
 
-\section{Introduction}
+\section{Previous Work}
+In previous analyses, Twitter sentiment was found to precede stock market changes by roughly three days \cite{bollen-ieee}. Self organizing fuzzy neural networks (SOFNN) were used to test the hypotheses, and Granger causality relations were performed to assess the POMS classification bearing on stock market changes \cite{bollen-ieee} \cite{bollen-jcs} \cite{mittal}. Of the POMS classification, only calm was found to be statistically significant \cite{bollen-ieee}. Opinion-finder, a widely used sentiment-analysis tool that classifies text, was lacking in any significant correlation with stock market changes \cite{bollen-ieee}.
 
-Your introduction goes here! Some examples of commonly used commands and features are listed below, to help you get started.
+\section{Proposed Method}
+We propose that a more refined model can be created by mining for specific cash-tags. Furthermore, we can normalize our cash-tag data by mining a subset of Twitter data to analyze the current POMS distribution against the mined cash-tag POMS distribution. We propose sentiment analysis by applying a modified version of Alex Davies' word list \cite{davies}. The collected data must be cleaned, so ideally we will clean it by selecting a subset of the data that is most likely to contain sentimental value. While the Twitter information is being processed, raw Dow-Jones values will be processed and fed into a SOFNN machine learning model to predict future DJIA values and make decisions on a mock portfolio with the goal of maximizing profits. 
 
-If you have a question, please use the support box in the bottom right of the screen to get in touch. 
-
-\section{Some \LaTeX{} Examples}
-\label{sec:examples}
-
-\subsection{Sections}
-
-Use section and subsection commands to organize your document. \LaTeX{} handles all the formatting and numbering automatically. Use ref and label commands for cross-references.
-
-\subsection{Comments}
-
-Comments can be added to the margins of the document using the \todo{Here's a comment in the margin!} todo command, as shown in the example on the right. You can also add inline comments too:
-
-\todo[inline, color=green!40]{This is an inline comment.}
-
-\subsection{Tables and Figures}
-
-Use the table and tabular commands for basic tables --- see Table~\ref{tab:widgets}, for example. You can upload a figure (JPEG, PNG or PDF) using the files menu. To include it in your document, use the includegraphics command as in the code for Figure~\ref{fig:frog} below.
-
-% Commands to include a figure:
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{frog.jpg}
-\caption{\label{fig:frog}This is a figure caption.}
-\end{figure}
-
-\begin{table}
-\centering
-\begin{tabular}{l|r}
-Item & Quantity \\\hline
-Widgets & 42 \\
-Gadgets & 13
-\end{tabular}
-\caption{\label{tab:widgets}An example table.}
-\end{table}
-
-\subsection{Mathematics}
-
-\LaTeX{} is great at typesetting mathematics. Let $X_1, X_2, \ldots, X_n$ be a sequence of independent and identically distributed random variables with $\text{E}[X_i] = \mu$ and $\text{Var}[X_i] = \sigma^2 < \infty$, and let
-$$S_n = \frac{X_1 + X_2 + \cdots + X_n}{n}
-      = \frac{1}{n}\sum_{i}^{n} X_i$$
-denote their mean. Then as $n$ approaches infinity, the random variables $\sqrt{n}(S_n - \mu)$ converge in distribution to a normal $\mathcal{N}(0, \sigma^2)$.
-
-\subsection{Lists}
-
-You can make lists with automatic numbering \dots
-
-\begin{enumerate}
-\item Like this,
-\item and like this.
-\end{enumerate}
-\dots or bullet points \dots
-\begin{itemize}
-\item Like this,
-\item and like this.
-\end{itemize}
-
-We hope you find write\LaTeX\ useful, and please let us know if you have any feedback using the help menu above.
-
+\section{Bibliography}
+\bibliographystyle{unsrt}%Used BibTeX style is unsrt
+\bibliography{proposal}
 \end{document}
