@@ -1,0 +1,3 @@
+46 * * * * /home/neeraj/Downloads/twitterstream-to-mongodb/copy.sh > /home/neeraj/Downloads/twitterstream-to-mongodb/AAPL-now-$(date +"%T-%Y%m%d").json
+48 * * * * /usr/bin/python3 /home/neeraj/Programs/Python\ Scripts/JSON_DB.py > /dev/null
+ 
